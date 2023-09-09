@@ -216,8 +216,7 @@ class LoadStateDictOnMeta(ReplaceHelper):
             """
 
             if state_dict == sd:
-                new_state_dict = {k: v.to(device="meta", dtype=v.dtype) for k, v in state_dict.items()}
-                state_dict = new_state_dict
+                state_dict = {k: v.to(device="meta", dtype=v.dtype) for k, v in list(state_dict.items())}
 
             original(module, state_dict, strict=strict)
 
